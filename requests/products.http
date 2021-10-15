@@ -1,0 +1,21 @@
+@api = http://localhost:5000/products
+
+GET {{api}}
+
+###
+POST {{api}}
+Content-Type: application/json
+
+{
+    "name":"microphone",
+    "description": "microphone Samsung",
+    "quantity": 30
+}
+###
+GET {{api}}/6
+
+###
+DELETE {{api}}/2
+
+###
+GET {{api}}//count
