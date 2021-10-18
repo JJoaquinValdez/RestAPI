@@ -65,7 +65,6 @@ export const DeleteProductbyId = async (req,res)=>{
 
  export const getTotalProducts = async (req,res)=>{
      try {
-        console.log("Count");
         const pool = await getConnection();
         const result = await pool.request().query(queries.getTotalProduct);
         res.json(result.recordset[0]['']);
@@ -75,16 +74,24 @@ export const DeleteProductbyId = async (req,res)=>{
      }
  }
  export const updateProductbyId = async (req,res) =>{
+  const {id} = req.params; 
   const {name,description, quantity} = req.body;
-  if(name==null||description==null, quantity==null){
+  
+  if(name==null||description==null|| quantity==null){
     return res.status(400).json({msg: "Bad request. Please Fill all fields"});
   }
 
-  const pool = await getConnection();
-  await pool.request()
-  .input("name",sql.VarChar, name)
-  .input("description", sql.Text, description)
-  .input("quantity", sql.Int, quantity)
-  .query(queries.updateProductbyId);
+  try {
+    const pool = await getConnection();
+    await pool.request()
+    .input("name",sql.VarChar, name)
+    .input("description", sql.Text, description)
+    .input("quantity", sql.Int, quantity)
+    .input('Id', id)
+    .query(queries.updateProductbyId);
+  } catch (error) {
+      res.status(500);
+      res.send(error.message);
+  }
   res.json({name, description, quantity}); 
  }

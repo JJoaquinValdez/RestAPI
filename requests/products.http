@@ -1,21 +1,33 @@
-@api = http://localhost:5000/products
+@api = http://localhost:5000/api/products
 
+### Obtener lista de productos
 GET {{api}}
 
-###
+### Crear un Producto Nuevo
 POST {{api}}
 Content-Type: application/json
 
 {
-    "name":"microphone",
-    "description": "microphone Samsung",
-    "quantity": 30
+    "name":"monitor",
+    "description": "monitor HP",
+    "quantity": 15
 }
-###
+
+### Obtener Producto por ID
 GET {{api}}/6
 
-###
+### Borrar producto por ID
 DELETE {{api}}/2
 
-###
-GET {{api}}//count
+### Obtener el numero de Productos
+GET {{api}}/count
+
+### Actualizar un Producto por ID
+PUT {{api}}/7
+Content-Type: application/json
+
+{
+    "name":"Laptop",
+    "description": "Laptop Gamer ASUS ROG",
+    "quantity": 20
+}
